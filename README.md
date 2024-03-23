@@ -4,16 +4,13 @@ This role installs CUDA packages from [the official Nvidia CUDA repos](https://d
 
 ## Installation
 
-Ansible galaxy is the recommended way to install this role in your environment.
+Ansible Galaxy is the recommended way to install this role in your environment.
 
 ### Using Ansible Galaxy CLI
 
 ```bash
 # Install the latest version from the repository
-ansible-galaxy role install git+https://github.com/bounverif/ansible-role-cuda-install.git
-
-# Install a specific version from the repository
-# ansible-galaxy role install git+https://github.com/bounverif/ansible-role-cuda-install.git,main
+ansible-galaxy role install git+https://github.com/bounverif/ansible-role-cuda-install.git,main,bounverif.cuda_install
 ```
 
 ### Using Ansible Galaxy requirements file
@@ -23,10 +20,11 @@ ansible-galaxy role install git+https://github.com/bounverif/ansible-role-cuda-i
 
 roles:
   # Install the latest version from GitHub
-  - src: https://github.com/bounverif/ansible-role-cuda-install
+  - name: bounverif.cuda_install
+    src: https://github.com/bounverif/ansible-role-cuda-install
     version: main
 
-  # Install the latest version from Galaxy Hub
+  # # Install the latest version from Galaxy Hub (not supported yet)
   # - name: bounverif.cuda_install
 ```
 
@@ -34,7 +32,7 @@ roles:
 ansible-galaxy install -r requirements.yml
 ```
 
-### Other methods
+### Using other methods
 
 See [Ansible Galaxy User Guide](https://docs.ansible.com/ansible/latest/galaxy/user_guide.html) for more options to install Ansible roles.
 
@@ -53,16 +51,7 @@ You can use this role to install a CUDA package on a supported Linux distro (`cu
         name: bounverif.cuda_install
       vars:
         cuda_install_packages:
-          - cuda-toolkit-12
-      when: "{{ ansible_os_family }}" == 'Debian'
-
-    - name: Install CUDA Packages (RHEL)
-        ansible.builtin.include_role:
-          name: bounverif.cuda_install
-        vars:
-          cuda_install_packages:
-            - cuda-toolkit-12-4
-        when: "{{ ansible_os_family }}" == 'Redhat'
+          - cuda-nvcc-12-4
 ```
 
 You can owerwrite `cuda_install_nvarch` and `cuda_install_distro` variables to directly control the repo setup as follows:
