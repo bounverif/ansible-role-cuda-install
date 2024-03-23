@@ -1,9 +1,9 @@
-- name: debian_family_install | Install cuda-keyring
+- name: debian-family | Install CUDA keyring
   become: true
   ansible.builtin.apt:
     deb: "{{ cuda_install_debian_family_keyring_file_url }}"
 
-- name: debian_family_install | Install CUDA packages via apt
+- name: debian-family | Install CUDA packages via apt
   become: true
   ansible.builtin.apt:
     name: "{{ cuda_install_packages }}"

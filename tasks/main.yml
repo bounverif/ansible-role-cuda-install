@@ -1,4 +1,28 @@
 ---
-- name: Dispatch to distro family specific tasks
+- name: Include distribution specific variables
+  ansible.builtin.include_vars:
+    file: "{{ lookup('ansible.builtin.first_found', search_hierarchy) }}"
+  vars:
+    search_hierarchy:
+      files:
+        - "{{ ansible_distribution | lower | replace('_', '-') | replace(' ', '-') }}-{{ ansible_distribution_version }}.yml"
+        - "{{ ansible_distribution | lower | replace('_', '-') | replace(' ', '-') }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution | lower | replace('_', '-') | replace(' ', '-') }}.yml"
+        - "{{ ansible_os_family | lower | replace('_', '-') | replace(' ', '-') }}-family.yml"
+        - "default_distro.yml"
+      paths:
+        - 'vars'
+
+- name: Perform distribution specific tasks
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower | replace('_', '-') | replace(' ', '-') }}_family_install.yml"
+    file: "{{ lookup('ansible.builtin.first_found', search_hierarchy) }}"
+  vars:
+    search_hierarchy:
+      files:
+        - "{{ ansible_distribution | lower | replace('_', '-') | replace(' ', '-') }}-{{ ansible_distribution_version }}.yml"
+        - "{{ ansible_distribution | lower | replace('_', '-') | replace(' ', '-') }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution | lower | replace('_', '-') | replace(' ', '-') }}.yml"
+        - "{{ ansible_os_family | lower | replace('_', '-') | replace(' ', '-') }}-family.yml"
+        - "default_distro.yml"
+      paths:
+        - 'tasks'

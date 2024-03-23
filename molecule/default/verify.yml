@@ -1,8 +1,9 @@
 ---
 - name: Verify
   hosts: all
+  gather_facts: false
   tasks:
-    - name: Verify CUDA Toolkit
+    - name: Verify CUDA installation
       ansible.builtin.command:
         cmd: "/usr/local/cuda-12.4/bin/nvcc --version"
       changed_when: false

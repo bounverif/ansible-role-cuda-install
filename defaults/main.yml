@@ -1,6 +1,6 @@
 cuda_install_packages: []
-cuda_install_nvarch: "{{ lookup('ansible.builtin.env', 'NVARCH', default='x86_64') }}"
-cuda_install_distro: "{{ cuda_install_distribution_map[cuda_install_distribution_tag] }}"
+cuda_install_nvarch: "{{ lookup('ansible.builtin.env', 'CUDA_ARCH', default='x86_64') }}"
+cuda_install_distro: "{{ lookup('ansible.builtin.env', 'CUDA_DISTRO') }}"
 
 cuda_install_nvidia_cuda_repos: https://developer.download.nvidia.com/compute/cuda/repos
 cuda_install_debian_family_keyring_filename: cuda-keyring_1.1-1_all.deb
