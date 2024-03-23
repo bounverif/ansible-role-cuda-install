@@ -5,12 +5,12 @@ on: # yamllint disable-line rule:truthy
   push:
     branches: [main]
     paths:
+      - defaults/**
+      - meta/**
+      - handlers/**
       - tasks/**
-      - molecule/**
-  pull_request:
-    branches: [main]
-    paths:
-      - tasks/**
+      - templates/**
+      - vars/**
       - molecule/**
 
 jobs:
