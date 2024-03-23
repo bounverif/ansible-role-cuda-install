@@ -1,0 +1,4 @@
+---
+- name: Dispatch to distro family specific tasks
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_os_family | lower | replace('_', '-') | replace(' ', '-') }}_family_install.yml"

@@ -1,0 +1,25 @@
+---
+dependencies: []
+
+galaxy_info:
+  namespace: bounverif
+  role_name: cuda_install
+  author: Dogan Ulus
+  description: Install Nvidia CUDA packages
+  company: "Boğaziçi University"
+  license: "license (MIT)"
+  min_ansible_version: "2.13.9"
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+    - name: Fedora
+      versions:
+        - "39"
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - nvidia
+    - cuda

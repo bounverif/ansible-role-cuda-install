@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Install CUDA Packages
+      ansible.builtin.include_role:
+        name: bounverif.cuda_install
+      vars:
+        cuda_install_packages:
+          - cuda-nvcc-12-4

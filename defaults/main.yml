@@ -1,0 +1,19 @@
+cuda_install_packages: []
+cuda_install_nvarch: "{{ lookup('ansible.builtin.env', 'NVARCH', default='x86_64') }}"
+cuda_install_distro: "{{ cuda_install_distribution_map[cuda_install_distribution_tag] }}"
+
+cuda_install_nvidia_cuda_repos: https://developer.download.nvidia.com/compute/cuda/repos
+cuda_install_debian_family_keyring_filename: cuda-keyring_1.1-1_all.deb
+cuda_install_debian_family_keyring_file_url_array:
+  - "{{ cuda_install_nvidia_cuda_repos }}"
+  - "{{ cuda_install_distro }}"
+  - "{{ cuda_install_nvarch }}"
+  - "{{ cuda_install_debian_family_keyring_filename }}"
+cuda_install_debian_family_keyring_file_url: "{{ cuda_install_debian_family_keyring_file_url_array | path_join }}"
+
+cuda_install_redhat_family_repo_baseurl_array:
+  - "https://developer.download.nvidia.com/compute/cuda/repos"
+  - "{{ cuda_install_distro }}"
+  - "{{ cuda_install_nvarch }}"
+  - cuda-{{ cuda_install_distro }}.repo
+cuda_install_redhat_family_repo_baseurl: "{{ cuda_install_redhat_family_repo_baseurl_array | path_join }}"
