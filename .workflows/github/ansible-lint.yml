@@ -4,6 +4,9 @@ name: Ansible Lint
 on: # yamllint disable-line rule:truthy
   push:
     branches: [main]
+    paths:
+      - tasks/**
+      - molecule/**
   pull_request:
     branches: [main]
     paths:
